@@ -12,6 +12,7 @@
   "dependencies": {
     "@cloudlyteam/cloudlyapi.js": "^1.0.5",
     "@discordjs/collection": "^0.1.6",
+    "distube": "^2.8.7",
     "aki-api": "^5.1.1",
     "animeflv": "^1.0.5",
     "antispam-discord": "^2.3.0",
