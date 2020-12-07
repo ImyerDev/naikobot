@@ -1,0 +1,1 @@
+module.exports = "<:covid:744380434682609666>"

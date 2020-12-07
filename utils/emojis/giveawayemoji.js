@@ -1,0 +1,1 @@
+module.exports = "<a:hypertada:714472101486264332>"

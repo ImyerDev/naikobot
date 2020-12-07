@@ -1,0 +1,1 @@
+module.exports = "<a:deny:718249526217015338>"
