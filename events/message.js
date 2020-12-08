@@ -2,7 +2,7 @@ let Levels = new (require("../utils/functions/discord-levels.js"))()
 let Prefix = new (require("../utils/functions/prefix.js"))()
 let Discord = require("discord.js")
 module.exports = async(client, message) =>{
-        /*let lang = new (require("megadb")).crearDB("lang").obtener(message.guild.id)
+        /*let lang = new (require("megadb")).crearDB("lang").obtener(message.guild.id) usando megadb ctm
         let idioma = await new (require("../utils/lang.js"))(client).language[await lang]*/
 	client.timer = new Discord.Collection()
         let saberchat = new (require("megadb")).crearDB("saberchat")
@@ -32,28 +32,7 @@ module.exports = async(client, message) =>{
 			return message.channel.send("¡Bienvenido de vuelta!")
 			}
 	let queue = client.queue.get(message.guild.id)
-/*  let link = new db.crearDB("links")
-    const links = [
-    "discord.gg",
-    "discord.me",
-    "discord.io/",
-    "discord.com/invite",
-    "discordapp.com/invite",
-    "https://",
-    "https://google.com/",
-    "https://discord.gg/",
-    "https://invite.gg/",
-    "invite.gg"
-  ]
-    if (links.some(word => message.content.toLowerCase().includes(word))) {
-      if(message.author.bot) return;
-      let embed = new Discord.MessageEmbed() //necesitamos el emoji animado :'c
-      .setDescription("<a:deny:718249526217015338> | Links / invitations are not allowed on this guild.")
-      .addField("Guild name:", message.guild.name)
-      .setColor("36393e")
-      .setThumbnail("https://www.google.com/url?sa=i&url=https%3A%2F%2Fgiphy.com%2Fexplore%2F404-error&psig=AOvVaw1q-t1Rgr6yGhJeAkRvqCAP&ust=1591400223225000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNjS1dyr6ekCFQAAAAAdAAAAABAJ")
-       message.channel.send(embed)
-      }//el de rechazado, la cruz*/
+
   let Database = require("megadb")
 let RegMention = new RegExp(`^<@!?${client.user.id}>( |)$`);
 
@@ -73,25 +52,7 @@ if(message.content == "F") {
 }
       if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) {
-	if (!Levels.fetch(message.author.id, message.guild.id)) {
-		  if (!timer.get(message.author.id)) {
-			timer.set(message.author.id, true);
-			setTimeout(() => {
-			  timer.delete(message.author.id);
-			}, 120000);
-			const randomAmountOfXp = Math.floor(Math.random() * 30) + 1
-			const hasLeveledUp = await Levels.appendXP(
-			  message.author.id,
-			  message.guild.id,
-			  randomAmountOfXp
-			);
-			if (hasLeveledUp) {
-			  const user = await Levels.fetch(message.author.id, message.guild.id);
-			message.channel.send(`${message.user.username}, has subido de nivel a ${user.nivel}`).then(m => m.delete(3000)).catch(error => console.log(error)) 
-			}
-		  }
-		}
-	return;
+        return;
   }
   //Argumentos
   const args = message.content.slice(prefix.length).trim().split(/ +/g)
@@ -161,7 +122,7 @@ if(message.content == "F") {
     console.log(e)
 
 	}
-  }else{
+  } else {
 	return;
   }
   }
