@@ -6,28 +6,35 @@ module.exports = {
 	desc: "Prostituite para obtener dinero",
 	usage: "<prefix>slut",
 	execute: async(client, message, args) =>{
-	let db = require("megadb")
-	let Dinero = new db.crearDB("money")
-	let random = Math.floor(Math.random() * 300)
-	if(!Dinero.tiene(`${message.guild.id}.currency`)) {
-		 Dinero.establecer(`${message.guild.id}`, "<:coin:720817136330735636>")
-	}
-	if(!Dinero.tiene(`${message.guild.id}.${message.author.id}`)) {
-		 Dinero.establecer(`${message.guild.id}.${message.author.id}.money`, 0)
-	}
-	let a;
-	if(random < 150) {
-    a = "A "+message.guild.members.cache.random().user.username+" no le gusto lo que hiciste, perdiste `"+random+"` "+await Dinero.obtener(`${message.guild.id}.currency`)
-	message.channel.send(a)
-	Dinero.restar(`${message.guild.id}.${message.author.id}.money`, random)
-	} else if(random > 210) {
-		a = "A "+message.guild.members.cache.random().user.username+" le gusto lo que hiciste, ganaste `"+random+"` "+await Dinero.obtener(`${message.guild.id}.currency`)
-	message.channel.send(a)
-	Dinero.sumar(`${message.guild.id}.${message.author.id}.money`, random)
-	} else if(random > 184) {
-	a = "A "+message.guild.members.cache.random().user.username+" le gusto lo que hiciste, ganaste `"+random+"` "+await Dinero.obtener(`${message.guild.id}.currency`)
-	message.channel.send(a)
-	Dinero.sumar(`${message.guild.id}.${message.author.id}.money`, random)
-	}
+        let guildEC = await client.economy.guilds.findOne({guildID: message.guild.id})
+        let userEC = await client.economy.users.findOne({guildID: message.guild.id, userID: message.author.id})
+	let Discord = require("discord.js")
+        if(guildEC == null) {
+        await client.economy.users.create({
+        guildID: message.guild.id
+        })
+        }
+	let random = Math.floor(Math.random() * guildEC.limitmoney)
+        if(random > 150) {
+        let yotra2 = await client.economy.users.findOne({guildID: message.guild.id, userID: message.author.id})
+        await client.economy.users.deleteMany({guildID: message.guild.id, userID: message.author.id}, {money: 0})
+        let cosawea = new client.economy.users({
+        guildID: message.guild.id,
+        userID: message.author.id,
+        'money': `-${random}`,
+        bank: 0
+        })
+        cosawea.save()
+        return message.channel.send(`${guildEC.works.slut2}${guildEC.emojimoney} -${random}`)
+        }
+        await client.economy.users.deleteMany({guildID: message.guild.id, userID: message.author.id}, {money: 0})
+        let cosawea = new client.economy.users({
+        guildID: message.guild.id,
+        userID: message.author.id,
+        'money': `${random}`,
+        bank: 0
+        })
+        cosawea.save()
+        message.channel.send(guildEC.works.slut1[Math.floor(Math.random() * guildEC.works.slut1.length)]+random);
 	}
 	}
